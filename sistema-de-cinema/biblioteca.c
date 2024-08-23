@@ -1,4 +1,3 @@
-teste git
 #include <stdio.h>
 
 //começar do id 1
@@ -107,14 +106,23 @@ int main(){
            //a partir dela vai movedando o da direita para esquerda ou seja, em um while enquanto id != 0
            //titulo[remover] = titulo[substituo], id=[remover] = id[substituto]
                    
-           scanf("", id_buscar);
+           scanf("%d", id_buscar);
            if (id_buscar <= MAX_ID && id_buscar != 0) //se satisfaz existe um filme nesse id! 
              {
                 //logica ir movendo do maior id para o menor. até que encontre um id=0
                while (id_buscar !=0)
                 {
-                    id[id] = id[id+1]
-                    id++;
+
+					//se o próximo id for 0, ou seja o fim, encerra o while.
+                    if(id_buscar+1 != id_buscar+1){
+                    	break;
+                    }
+
+                	//id deve permanecer o mesmo, oque muda sao as informações
+                    titulo[id_buscar] = id[id_buscar+1]
+                    id_buscar++;
+
+
                 }
              }
     
