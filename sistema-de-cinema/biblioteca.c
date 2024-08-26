@@ -1,16 +1,14 @@
 #include <stdio.h>
-
-//começar do id 1
+#include <string.h>
+#define QTD 50 // Defina o valor de qtd aqui
+#define MAX_ID 99 // define quantos ids de filmes podem existir
 
 int main(){
 	int opc=0;
 	int n=0;
 
-	#define qtd 50 // Defina o valor de qtd aqui
-	#define MAX_ID 99 // define quantos ids de filmes podem existir
-
-	int id[qtd] = {0}, anoLancamento[qtd];
-	char titulo[qtd][50], sinopse [qtd][255], genero[qtd][50];
+	int id[QTD] = {0}, anoLancamento[QTD] = {0};
+	char titulo[QTD][50], sinopse [QTD][255], genero[QTD][50];
 
 	while(opc != 5)
 	{
@@ -19,26 +17,22 @@ int main(){
 		printf("3.Deletar Filme\n");
 		printf("4.Exibir todos os filmes\n");
 		printf("5.Sair\n");
+		
 		printf("Digite uma opcao: ");
 		scanf("%d", &opc);
 		printf("\n");
 
 		if(opc==1)
 		{
-			/*
-			procurar o primeiro id = 0.
-			percorrer o vetor do inicio até encontrar um id=0;
-			apos encontrar soma o anterior + 1
-			*/
-			for(int i=0; i<=99; i++){
-				if(id[i]==0){
-					n=i;
+			for(int i = 1; i <= 99; i++){
+				if( id[i] == 0) {
+					n=i; //passar o id para n
 					break;
 				}
 			}
 
-			printf("DEBUG: %d\n", n);
-			id[n] =  id[n-1] + 1;
+			printf("CADASTRANDO FILME N^: %d %d", n, id[n]);
+			id[n] =  id[n-1] + 1; //continua a seq. de id.
 			
 			printf("===CADASTRAR FILME===\n");
 			printf("Informações sobre o filme\n");
@@ -52,7 +46,8 @@ int main(){
 			printf("Digite o ano de Lançamento: ");
 			scanf("%d", &anoLancamento[n]);
 			printf("CADASTRADO COM SUCESSO!!!\n");
-			opc=0;
+			
+			opc=0; //retorna ao menu
 		}
 
 		if(opc==2)
@@ -62,31 +57,37 @@ int main(){
 			  //verifica se o id existe, se está no intervalo dos filmes criados.
 			//EXIBIR AS INFORMAÇÕES ATUAIS DO FILME
 			//APOS ISSO INICIA A EDIÇÃO
+			
 
-			printf("Digite o id do Filme: ");
-			scanf("%d", id_buscar);
+			printf("Digite o id do Filme para EDITAR: ");
+			scanf("%d", &n);
+			printf("\n");
 
-			for(int i = 0; i <= MAX_ID; i++)
+			for(int i = 1; i <= MAX_ID; i++)
 			{
-				if(id != 0 && id==id_buscar)
+				if( ( id[i] != 0 ) && ( id[i] == n ) )
 				{
 					//exibe info
-					printf("EXIBINDO INFORMAÇÕES ATUAIS.")
-					printf("TITULO %d \n", titulo[id]);
-					printf("GENERO\n", );
-					printf("ANO\n", );
+					printf("EXIBINDO INFORMAÇÕES ATUAIS.\n");
+					printf("TITULO : %s", titulo[n]);
+					printf("GENERO : %s", sinopse[n]);
+					printf("ANO : %d", anoLancamento[n]);
 
 					printf("\n");
 
-					printf("DIGITE AS NOVAS INFORMAÇÕES\n")
-					printf("TITULO\n");
-					fgets(titulo[id],50,stdin)
-					printf("GENERO\n");
-					fgets(genero[id],50, stdin);
-					printf("ANO\n");
+					printf("DIGITE AS NOVAS INFORMAÇÕES\n");
+					getchar(); //limpar o buffer
+					printf("TITULO: ");
+					fgets(titulo[n], 50, stdin);
+					printf("SINOPSE: ");
+					fgets(sinopse[n], 50, stdin);
+					printf("GENERO: ");
+					fgets(genero[n], 50 , stdin);
+					printf("ANO: ");
 					scanf("%d", &anoLancamento);
 					
 					printf("INFORMAÇÕES MODIFICADAS\n");
+					break;
 				}
 			}
 
@@ -104,25 +105,26 @@ int main(){
            //a partir dela vai movedando o da direita para esquerda ou seja, em um while enquanto id != 0
            //titulo[remover] = titulo[substituo], id=[remover] = id[substituto]
            printf("DIGITE O ID DO FILME A SER DELETADO!");
-           scanf("%d", id_buscar);
+           scanf("%d", n);
 
-           if (id_buscar <= MAX_ID && id_buscar != 0) //se satisfaz existe um filme nesse id! 
+           if ( ( n <= MAX_ID ) && ( n != 0 ) && id[n] != 0 ) //se satisfaz VAI existir um filme nesse id! 
              {
                 //logica ir movendo do maior id para o menor. até que encontre um id=0
-               while (id_buscar != 0)
+               while (n != 0)
                 {
 					//se o próximo id for 0, ou seja o fim, encerra o while.
-                    if(id_buscar+1 != id_buscar+1)
+                    if( id[n+1] == 0 )  
                     {
                     	break;
                     }
-
-                	//id deve permanecer o mesmo, oque muda sao as informações
-                    titulo[id_buscar] = id[id_buscar+1]
-                    id_buscar++;
-                    opc=0;
-
-
+                	//id deve permanecer o mesmo, oque muda são as informações
+                    //titulo[n] = titulo[n+1];
+                    //sinopse[n] = sinopse[n+1];
+                    anoLancamento[n] = anoLancamento[n+1];
+                    strcpy(titulo[n], titulo[n + 1]);
+                    strcpy(sinopse[n], sinopse[n + 1]);
+                    //anoLancamento[j] = anoLancamento[j + 1];
+                    n++;
                 }
              }
              else
@@ -130,21 +132,22 @@ int main(){
              	printf("NÃO É POSSIVEL DELETAR\nESSE ID NÃO EXISTE\n");
              }
     
-
+          opc=0;
 		}
 
 		if(opc==4)
 		{
 			printf("===TODOS OS FILMES===\n");
 			
-			for(int i=0; i <= MAX_ID; i++){
-				printf("%d.%s", i, titulo[i]);
-				opc=0;
-				if(id[i]==0){
-					printf("\n");
+			//se não houver nenhum filme alertar
+			for(int i = 1; i <= MAX_ID; i++){
+				if( id[i] == 0 ){
+					printf("\nTODOS OS FILMES FORAM EXIBIDOS!\n\n");
 					break;
 				}
+				printf("%d.%s", i, titulo[i] );
 			}
+			opc=0;
 		}
 
 		if(opc==5)
