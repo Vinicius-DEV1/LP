@@ -5,22 +5,20 @@
 int main(){
 	int opc=0;
 	int n=0;
-	//int qtd=99;
+
 	#define qtd 50 // Defina o valor de qtd aqui
 	#define MAX_ID 99 // define quantos ids de filmes podem existir
 
 	int id[qtd] = {0}, anoLancamento[qtd];
 	char titulo[qtd][50], sinopse [qtd][255], genero[qtd][50];
 
-	while(opc != 7)
+	while(opc != 5)
 	{
 		printf("1.Cadastar Filme\n");
 		printf("2.Editar Filme\n");
 		printf("3.Deletar Filme\n");
 		printf("4.Exibir todos os filmes\n");
-		printf("5.Exibir por genero\n");
-		printf("6.Exibir por ano de lançamento\n");
-		printf("7.Sair\n");
+		printf("5.Sair\n");
 		printf("Digite uma opcao: ");
 		scanf("%d", &opc);
 		printf("\n");
@@ -105,25 +103,31 @@ int main(){
 
            //a partir dela vai movedando o da direita para esquerda ou seja, em um while enquanto id != 0
            //titulo[remover] = titulo[substituo], id=[remover] = id[substituto]
-                   
+           printf("DIGITE O ID DO FILME A SER DELETADO!");
            scanf("%d", id_buscar);
+
            if (id_buscar <= MAX_ID && id_buscar != 0) //se satisfaz existe um filme nesse id! 
              {
                 //logica ir movendo do maior id para o menor. até que encontre um id=0
-               while (id_buscar !=0)
+               while (id_buscar != 0)
                 {
-
 					//se o próximo id for 0, ou seja o fim, encerra o while.
-                    if(id_buscar+1 != id_buscar+1){
+                    if(id_buscar+1 != id_buscar+1)
+                    {
                     	break;
                     }
 
                 	//id deve permanecer o mesmo, oque muda sao as informações
                     titulo[id_buscar] = id[id_buscar+1]
                     id_buscar++;
+                    opc=0;
 
 
                 }
+             }
+             else
+             {
+             	printf("NÃO É POSSIVEL DELETAR\nESSE ID NÃO EXISTE\n");
              }
     
 
@@ -145,16 +149,7 @@ int main(){
 
 		if(opc==5)
 		{
-
-		}
-
-		if(opc==6)
-		{
-
-		}
-
-		if(opc==7)
-		{
+			printf("ENCERRADO\n");
 			break;
 		}
 
