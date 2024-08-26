@@ -26,7 +26,7 @@ int main(){
 		{
 			for(int i = 1; i <= 99; i++){
 				if( id[i] == 0) {
-					n=i; //passar o id para n
+					n=i;
 					break;
 				}
 			}
@@ -105,7 +105,7 @@ int main(){
            //a partir dela vai movedando o da direita para esquerda ou seja, em um while enquanto id != 0
            //titulo[remover] = titulo[substituo], id=[remover] = id[substituto]
            printf("DIGITE O ID DO FILME A SER DELETADO!");
-           scanf("%d", n);
+           scanf("%d", &n);
 
            if ( ( n <= MAX_ID ) && ( n != 0 ) && id[n] != 0 ) //se satisfaz VAI existir um filme nesse id! 
              {
@@ -115,6 +115,8 @@ int main(){
 					//se o próximo id for 0, ou seja o fim, encerra o while.
                     if( id[n+1] == 0 )  
                     {
+                    	id[n]=0;
+                    	printf("EXCLUSAO CONCLUIDA");
                     	break;
                     }
                 	//id deve permanecer o mesmo, oque muda são as informações
@@ -129,7 +131,7 @@ int main(){
              }
              else
              {
-             	printf("NÃO É POSSIVEL DELETAR\nESSE ID NÃO EXISTE\n");
+             	printf("NÃO É POSSIVEL DELETAR\nESSE ID NÃO EXISTE\n\n");
              }
     
           opc=0;
