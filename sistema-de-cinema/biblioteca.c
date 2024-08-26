@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define QTD 50 
+#define QTD 255 
 #define MAX_ID 99
 
 int main(){
@@ -8,10 +8,11 @@ int main(){
 	int n = 0;
 
 	int id[QTD] = {0}, anoLancamento[QTD] = {0};
-	char titulo[MAX_ID][50], sinopse [MAX_ID][255], genero[MAX_ID][50];
+	char titulo[MAX_ID][QTD], sinopse [MAX_ID][QTD], genero[MAX_ID][QTD];
 
 	while(opc != 5)
 	{
+		printf("====MENU====\n");
 		printf("1.Cadastar Filme\n");
 		printf("2.Editar Filme\n");
 		printf("3.Deletar Filme\n");
@@ -24,9 +25,9 @@ int main(){
 
 		if( opc == 1 )
 		{
-			for(int i = 1; i <= 99; i++){
+			for(int i = 1; i <= MAX_ID; i++){
 				if( id[i] == 0) {
-					n=i;
+					n = i;
 					break;
 				}
 			}
@@ -39,18 +40,19 @@ int main(){
 			getchar();
 			fgets(titulo[n], QTD, stdin);
 			printf("Digite a Sinopse: ");
-			fgets(sinopse[n], 50, stdin);
+			fgets(sinopse[n], QTD, stdin);
 			printf("Digite o genero: ");
-			fgets(genero[n], 50, stdin);
+			fgets(genero[n], QTD, stdin);
 			printf("Digite o ano de Lançamento: ");
 			scanf("%d", &anoLancamento[n]);
 			printf("CADASTRADO COM SUCESSO!!!\n\n");
 			
-			opc=0; //retorna ao menu
+			opc=0;
 		}
 
 		if( opc == 2 )
 		{			
+			printf("====EDICAO====")
 			printf("Digite o id do Filme para EDITAR: ");
 			scanf("%d", &n);
 			printf("\n");
@@ -68,8 +70,8 @@ int main(){
 					printf("\n");
 
 					printf("DIGITE AS NOVAS INFORMAÇÕES\n");
-					getchar(); //limpar o buffer
 					printf("TITULO: ");
+					getchar();
 					fgets(titulo[n], QTD, stdin);
 					printf("SINOPSE: ");
 					fgets(sinopse[n], QTD, stdin);
