@@ -31,13 +31,12 @@ int main(){
 				}
 			}
 
-			printf("CADASTRANDO FILME N^: %d %d", n, id[n]);
-			id[n] =  id[n-1] + 1; //continua a seq. de id.
-			
+			id[n] =  id[n-1] + 1;
+
 			printf("===CADASTRAR FILME===\n");
 			printf("Informações sobre o filme\n");
 			printf("Digite o Titulo: ");
-			getchar(); //limpar o buffer
+			getchar();
 			fgets(titulo[n], QTD, stdin);
 			printf("Digite a Sinopse: ");
 			fgets(sinopse[n], 50, stdin);
@@ -89,17 +88,17 @@ int main(){
 
 		if(opc==3)
 		{
-           printf("DIGITE O ID DO FILME A SER DELETADO!");
+           printf("DIGITE O ID DO FILME A SER DELETADO: ");
            scanf("%d", &n);
 
-           if ( ( n <= MAX_ID ) && ( n != 0 ) && id[n] != 0 ) //se satisfaz VAI existir um filme nesse id! 
+           if ( ( n > 0 &&  n <= MAX_ID ) && id[n] != 0 )
              {
                while (n != 0)
                 {
                     if( id[n+1] == 0 )  
                     {
-                    	id[n]=0;
-                    	printf("EXCLUSAO CONCLUIDA");
+                    	id[n] = 0;
+                    	printf("FILME DELETADO COM SUCESSO!!!");
                     	break;
                     }
                     anoLancamento[n] = anoLancamento[n+1];
